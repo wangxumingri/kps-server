@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wxss.kps.dao.UserDao">
+    <resultMap id="BaseResultMap" type="com.wxss.kps.rbac.User">
+        <!--@mbg.generated-->
+        <!--@Table `user`-->
+        <id column="uid" jdbcType="VARCHAR" property="uid"/>
+        <result column="username" jdbcType="VARCHAR" property="username"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="realName" jdbcType="VARCHAR" property="realName"/>
+        <result column="NICK_NAME" jdbcType="VARCHAR" property="nickName"/>
+        <result column="phone" jdbcType="VARCHAR" property="phone"/>
+    </resultMap>
+    
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        `uid`, username, `password`, realName, NICK_NAME, phone
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        <!--@mbg.generated-->
+    select 
+    
+        <include refid="Base_Column_List"/>
+        
+    from `user`
+    where `uid` = #{uid,jdbcType=VARCHAR}
+  
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        <!--@mbg.generated-->
+    delete from `user`
+    where `uid` = #{uid,jdbcType=VARCHAR}
+  
+    </delete>
+    <insert id="insert" parameterType="com.wxss.kps.rbac.User">
+        <!--@mbg.generated-->
+    insert into `user` (`uid`, username, `password`, 
+      realName, NICK_NAME, phone
+      )
+    values (#{uid,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{realName,jdbcType=VARCHAR}, #{nickName,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}
+      )
+  
+    </insert>
+    <insert id="insertSelective" parameterType="com.wxss.kps.rbac.User">
+        <!--@mbg.generated-->
+    insert into `user`
+    
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="uid != null">
+                `uid`,
+      
+            </if>
+            <if test="username != null">
+                
+        username,
+      
+            </if>
+            <if test="password != null">
+                
+        `password`,
+      
+            </if>
+            <if test="realName != null">
+                
+        realName,
+      
+            </if>
+            <if test="nickName != null">
+                
+        NICK_NAME,
+      
+            </if>
+            <if test="phone != null">
+                
+        phone,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="uid != null">
+                #{uid,jdbcType=VARCHAR},
+      
+            </if>
+            <if test="username != null">
+                
+        #{username,jdbcType=VARCHAR},
+      
+            </if>
+            <if test="password != null">
+                
+        #{password,jdbcType=VARCHAR},
+      
+            </if>
+            <if test="realName != null">
+                
+        #{realName,jdbcType=VARCHAR},
+      
+            </if>
+            <if test="nickName != null">
+                
+        #{nickName,jdbcType=VARCHAR},
+      
+            </if>
+            <if test="phone != null">
+                
+        #{phone,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.wxss.kps.rbac.User">
+        <!--@mbg.generated-->
+    update `user`
+    
+        <set>
+            <if test="username != null">
+                username = #{username,jdbcType=VARCHAR},
+      
+            </if>
+            <if test="password != null">
+                
+        `password` = #{password,jdbcType=VARCHAR},
+      
+            </if>
+            <if test="realName != null">
+                
+        realName = #{realName,jdbcType=VARCHAR},
+      
+            </if>
+            <if test="nickName != null">
+                
+        NICK_NAME = #{nickName,jdbcType=VARCHAR},
+      
+            </if>
+            <if test="phone != null">
+                
+        phone = #{phone,jdbcType=VARCHAR},
+            </if>
+        </set>
+        
+    where `uid` = #{uid,jdbcType=VARCHAR}
+  
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.wxss.kps.rbac.User">
+        <!--@mbg.generated-->
+    update `user`
+    set username = #{username,jdbcType=VARCHAR},
+      `password` = #{password,jdbcType=VARCHAR},
+      realName = #{realName,jdbcType=VARCHAR},
+      NICK_NAME = #{nickName,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR}
+    where `uid` = #{uid,jdbcType=VARCHAR}
+  
+    </update>
+
+    <select id="findAll" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List" /> from `user`
+    </select>
+
+    <select id="findOneByUsername" parameterType="string" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List" /> from `user` where username = #{username,jdbcType=VARCHAR}
+    </select>
+</mapper>

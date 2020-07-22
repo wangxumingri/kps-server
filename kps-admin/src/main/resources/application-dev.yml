@@ -1,0 +1,26 @@
+# 配置web端口
+server:
+  port: 9999
+  servlet:
+    context-path: /kps
+spring:
+  # 配置数据源
+  datasource:
+    url: jdbc:mysql://192.168.3.34:3306/kps?useUnicode=true&characterEncoding=utf8&useSSL=false
+    username: kps
+    password: Kps@123456.
+    driver-class-name: com.mysql.jdbc.Driver
+
+mybatis:
+  mapper-locations: classpath*:META-INF/mapper/*Mapper.xml  #注意：一定要对应mapper映射xml文件的所在路径
+  # mybatis全局配置文件位置
+#  config-location: classpath*:/mybatis/config/mybatis-config.xml
+
+logging:
+  level:
+    # 只打印sql语句
+    com.wss.kps.dao: debug
+  file:
+    name: /usr/local/wxss/app/log/kps.log
+
+
