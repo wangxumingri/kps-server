@@ -1,12 +1,15 @@
 package com.wxss.kps.admin.controller;
 
-import com.wxss.kps.dao.UserDao;
+import com.wxss.http.RequestVo;
+import com.wxss.http.ResponseBuilder;
+import com.wxss.http.ResponseVo;
+import com.wxss.kps.common.exception.ServiceException;
 import com.wxss.kps.dto.rbac.LoginReqDto;
 import com.wxss.kps.dto.rbac.LoginResDto;
-import com.wxss.kps.rbac.User;
 import com.wxss.kps.service.rbac.IRbacService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -19,8 +22,8 @@ public class LoginController {
 
     @PostMapping("login")
     @ResponseBody
-    public LoginResDto login(@RequestBody LoginReqDto loginReqDto){
-        return rbacService.login(loginReqDto);
+    public ResponseVo<LoginResDto> login(@Validated @RequestBody RequestVo<LoginReqDto> requestVo) throws ServiceException {
+        return ResponseBuilder.success(rbacService.login(requestVo.getBody())) ;
     }
 
 }

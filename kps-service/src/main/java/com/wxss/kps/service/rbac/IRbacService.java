@@ -1,5 +1,6 @@
 package com.wxss.kps.service.rbac;
 
+import com.wxss.kps.common.exception.ServiceException;
 import com.wxss.kps.dto.rbac.LoginReqDto;
 import com.wxss.kps.dto.rbac.LoginResDto;
 import com.wxss.kps.rbac.User;
@@ -18,5 +19,5 @@ public interface IRbacService {
      * @param reqDto
      * @return
      */
-    LoginResDto login(LoginReqDto reqDto);
+    LoginResDto login(LoginReqDto reqDto) throws ServiceException;
 }

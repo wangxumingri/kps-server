@@ -1,5 +1,6 @@
 package com.wxss.kps.service.rbac.impl;
 
+import com.wxss.kps.common.exception.ServiceException;
 import com.wxss.kps.dao.UserDao;
 import com.wxss.kps.dto.rbac.LoginReqDto;
 import com.wxss.kps.dto.rbac.LoginResDto;
@@ -22,21 +23,18 @@ public class RbacServiceImpl implements IRbacService {
     }
 
     @Override
-    public LoginResDto login(LoginReqDto reqDto) {
+    public LoginResDto login(LoginReqDto reqDto) throws ServiceException {
         LoginResDto loginResDto = new LoginResDto();
         User userInDB = userDao.findOneByUsername(reqDto.getUsername());
         if (userInDB == null){
-            loginResDto.setFlag(false);
-            loginResDto.setMsg("用户不存在");
+            throw new ServiceException("用户不存在");
         }else {
             if (userInDB.getPassword().equals(reqDto.getPassword())){
                 loginResDto.setFlag(true);
             }else {
-                loginResDto.setFlag(false);
-                loginResDto.setMsg("用户或密码不正确");
+                throw new ServiceException("用户或密码错误");
             }
         }
-
         return loginResDto;
     }
 }
