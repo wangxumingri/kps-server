@@ -1,40 +1,3 @@
-
-
-## 日志
-
-```
-logging:
-  level:
-    root: info
-    # 只打印sql语句
-    com.wss.kps.dao: debug
-  file:
-    name: D:/log/kps.log
-```
-
-**使用示例**
-
-```
-    private Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
-    
-    ...
-    
-    logger.error("处理参数校验异常:{}",e.getMessage(),e);
-```
-
-## 配置AOP
-
-添加依赖
-```
- <dependency>
-                <groupId>org.aspectj</groupId>
-                <artifactId>aspectjweaver</artifactId>
-                <version>${aspectj.version}</version>
- </dependency>
-```
-
-配置切面
-```
 package com.wxss.kps.admin.aop;
 
 import com.wxss.exception.CoreException;
@@ -110,5 +73,3 @@ public class HttpAop {
         }
     }
 }
-
-```

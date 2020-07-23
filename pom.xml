@@ -69,10 +69,16 @@
                 <artifactId>wxss-common</artifactId>
                 <version>1.0-SNAPSHOT</version>
             </dependency>
+            <!--数据校验注解-->
             <dependency>
                 <groupId>javax.validation</groupId>
                 <artifactId>validation-api</artifactId>
                 <version>${validation.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.aspectj</groupId>
+                <artifactId>aspectjweaver</artifactId>
+                <version>${aspectj.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
