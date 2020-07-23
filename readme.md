@@ -112,3 +112,51 @@ public class HttpAop {
 }
 
 ```
+
+## 跨域处理
+
+### 使用`@CrossOrigin`注解
+
+在需要跨域的接口上使用`@CrossOrigin`注解，（麻烦）
+
+```
+@Controller
+@RequestMapping("")
+@CrossOrigin
+public class LoginController {
+
+    @Autowired
+    private IRbacService rbacService;
+
+    @RequestMapping("login")
+    @ResponseBody
+    public ResponseVo<LoginResDto> login(@Validated @RequestBody RequestVo<LoginReqDto> requestVo) throws ServiceException {
+        return ResponseBuilder.success(rbacService.login(requestVo.getBody())) ;
+    }
+
+}
+```
+
+### 全局配置WebMvcConfigurer
+
+```
+@Configuration
+public class MvcConfigurer implements WebMvcConfigurer {
+
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**")
+                .allowedOrigins("*")
+                .allowedMethods("GET", "POST", "DELETE", "OPTIONS", "PUT", "HEAD")
+                .allowCredentials(true);
+    }
+
+<!--    @Override-->
+<!--    public void addResourceHandlers(ResourceHandlerRegistry registry) {-->
+<!--        registry.addResourceHandler("/static/**")-->
+<!--                .addResourceLocations("resources:/static/")-->
+<!--                .setCacheControl(CacheControl.maxAge(1, TimeUnit.HOURS).cachePublic());-->
+<!--    }-->
+
+}
+```
